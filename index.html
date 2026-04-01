@@ -23,6 +23,10 @@
     </div>
   </header>
 
+  <button class="mobile-cart-btn" onclick="toggleCart()">
+    🛒 <span id="mobileBadge" class="badge">0</span>
+  </button>
+
   <div class="app">
     <!-- LEFT: MENU -->
     <div class="menu-panel">
@@ -73,6 +77,7 @@
         <div class="order-title">
           Pedido
           <span class="badge" id="itemCount">0</span>
+          <button class="close-order-btn" onclick="toggleCart()">CERRAR ✕</button>
         </div>
         <div class="order-customer" id="orderCustomer">Sin cliente</div>
       </div>

@@ -616,7 +616,7 @@
  }
 
  /* RESPONSIVE */
- @media (max-width: 768px) {
+ /*@media (max-width: 768px) {
      .app {
          grid-template-columns: 1fr;
      }
@@ -624,4 +624,71 @@
      .order-panel {
          display: none;
      }
+ }*/
+ /* === RESPONSIVE & MOBILE OPTIMIZATION === */
+ @media (max-width: 768px) {
+     .app {
+         grid-template-columns: 1fr;
+         /* Una sola columna en el cel */
+         position: relative;
+     }
+
+     /* Ocultamos el panel de pedido por defecto en móvil */
+     .order-panel {
+         position: fixed;
+         top: 0;
+         right: -100%;
+         /* Escondido a la derecha */
+         width: 100%;
+         height: 100%;
+         z-index: 1000;
+         transition: right 0.3s ease;
+     }
+
+     /* Clase para mostrar el carrito en móvil */
+     .order-panel.mobile-open {
+         right: 0;
+     }
+
+     /* Ajuste de la cuadrícula de productos */
+     .menu-grid {
+         grid-template-columns: repeat(2, 1fr);
+         /* 2 columnas fijas en cel */
+         gap: 10px;
+     }
+
+     /* Botón flotante para ver carrito (Solo aparece en móvil) */
+     .mobile-cart-btn {
+         display: flex !important;
+         position: fixed;
+         bottom: 20px;
+         right: 20px;
+         background: var(--bq-yellow);
+         color: var(--bq-dark);
+         width: 60px;
+         height: 60px;
+         border-radius: 50%;
+         align-items: center;
+         justify-content: center;
+         font-size: 24px;
+         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+         z-index: 900;
+         border: none;
+     }
+
+     .close-order-btn {
+         display: block !important;
+         background: transparent;
+         color: var(--bq-yellow);
+         border: 1px solid var(--bq-yellow);
+         padding: 5px 10px;
+         border-radius: 5px;
+         font-family: 'Bebas Neue';
+     }
+ }
+
+ /* Elementos ocultos en PC pero útiles en móvil */
+ .mobile-cart-btn,
+ .close-order-btn {
+     display: none;
  }

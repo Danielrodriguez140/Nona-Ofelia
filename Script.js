@@ -147,10 +147,21 @@ function renderOrder() {
     const total = entries.reduce((s, { item, qty }) => s + item.price * qty, 0);
     const count = entries.reduce((s, { qty }) => s + qty, 0);
 
+    // AGREGAR ESTA LÍNEA para mobil
+    if (document.getElementById('mobileBadge')) {
+        document.getElementById('mobileBadge').textContent = count;
+    }
+
+    document.getElementById('sendBtn').disabled = entries.length === 0;
+
     document.getElementById('subtotalDisplay').textContent = '$' + total;
     document.getElementById('totalDisplay').textContent = total;
     document.getElementById('itemCount').textContent = count;
     document.getElementById('sendBtn').disabled = entries.length === 0;
+
+
+
+
 }
 
 // Client name live update
