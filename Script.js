@@ -31,15 +31,16 @@
 };*/
 
 const PRODUCTS = [
-    { id: 1, name: "Sorrentinos de jamón y mozzarella", desc: "Relleno cremoso, masa fina artesanal", price: 3200, emoji: "🫓", cat: "Sorrentinos", unit: "docena" },
-    { id: 2, name: "Sorrentinos de ricota y espinaca", desc: "Con queso fresco y espinaca salteada", price: 3000, emoji: "🫓", cat: "Sorrentinos", unit: "docena" },
-    { id: 3, name: "Sorrentinos de carne", desc: "Relleno de carne braseada y verduras", price: 3400, emoji: "🫓", cat: "Sorrentinos", unit: "docena" },
-    { id: 4, name: "Sorrentinos 4 quesos", desc: "Mozzarella, provolone, parmesano y ricota", price: 3500, emoji: "🫓", cat: "Sorrentinos", unit: "docena" },
-    { id: 5, name: "Sorrentinos de pollo", desc: "Pollo desmenuzado con ciboulette", price: 3300, emoji: "🫓", cat: "Sorrentinos", unit: "docena" },
-    { id: 6, name: "Sorrentinos de calabaza", desc: "Calabaza asada con nuez moscada", price: 3000, emoji: "🫓", cat: "Sorrentinos", unit: "docena" },
-    { id: 7, name: "Salsa fileto", desc: "Tomate natural con albahaca fresca", price: 900, emoji: "🍅", cat: "Salsas", unit: "porción" },
+    { id: 1, name: "Sorrentinos de jamón y mozzarella", desc: "Relleno cremoso, masa fina artesanal", price: 4000, emoji: "🫓", cat: "Sorrentinos", unit: "caja" },
+    { id: 2, name: "Sorrentinos de ricota y espinaca", desc: "Con queso fresco y espinaca salteada", price: 400, emoji: "🫓", cat: "Sorrentinos", unit: "caja" },
+    { id: 3, name: "Sorrentinos de carne", desc: "Relleno de carne braseada y verduras", price: 400, emoji: "🫓", cat: "Sorrentinos", unit: "caja" },
+    { id: 4, name: "Sorrentinos 4 quesos", desc: "Mozzarella, provolone, parmesano y ricota", price: 400, emoji: "🫓", cat: "Sorrentinos", unit: "caja" },
+    { id: 5, name: "Sorrentinos de pollo", desc: "Pollo desmenuzado con ciboulette", price: 400, emoji: "🫓", cat: "Sorrentinos", unit: "caja" },
+    { id: 6, name: "Sorrentinos de calabaza", desc: "Calabaza asada con nuez moscada", price: 400, emoji: "🫓", cat: "Sorrentinos", unit: "caja" },
+    /*{ id: 7, name: "Salsa fileto", desc: "Tomate natural con albahaca fresca", price: 900, emoji: "🍅", cat: "Salsas", unit: "porción" },
     { id: 8, name: "Salsa bolognesa", desc: "Carne picada con vino y especias", price: 1200, emoji: "🥫", cat: "Salsas", unit: "porción" },
-    { id: 9, name: "Salsa crema", desc: "Crema de leche con ajo y perejil", price: 850, emoji: "🧄", cat: "Salsas", unit: "porción" },
+    { id: 9, name: "Salsa crema", desc: "Crema de leche con ajo y perejil", price: 850, emoji: "🧄", cat: "Salsas", unit: "porción" },*/
+
 ];
 
 // ===== STATE =====
@@ -178,12 +179,17 @@ function sendWA() {
     const nombre = document.getElementById("clientName").value.trim() || "Cliente";
     //const nota = document.getElementById("cnota").value.trim();
     let total = 0;
-    let lines = items.map(([id, qty]) => {
-        const p = PRODUCTS.find(x => x.id == id);
-        const sub = p.price * qty;
+
+
+
+    let lines = items.map((e) => {
+        const p = PRODUCTS.find(x => x.id == e[0]);
+        const sub = p.price * e[1].qty;
         total += sub;
-        return `• ${p.name} x${qty} ${p.unit} = $${sub.toLocaleString('es-AR')}`;
+        return `• ${p.name} x${e[1].qty} ${p.unit} = $${sub.toLocaleString('es-AR')}`;
     });
+
+
     let msg = `Hola Nona Ofelia! Soy *${nombre}* y quiero hacer el siguiente pedido:%0A%0A${lines.join('%0A')}%0A%0A*Total: $${total.toLocaleString('es-AR')}*`;
     /*if (nota) msg += `%0A%0A_Nota: ${nota}_`;*/
     msg += `%0A%0AMuchas gracias!`;
@@ -202,6 +208,7 @@ function sendOrder() {
         : '✅ ¡Pedido enviado a Nona Ofelia!';
 
     toast.classList.add('show');
+
     setTimeout(() => toast.classList.remove('show'), 3500);
 
     sendWA();
@@ -212,6 +219,6 @@ function sendOrder() {
     renderOrder();
 }
 
-
+let prueba = Object.values(order);
 
 renderOrder();
