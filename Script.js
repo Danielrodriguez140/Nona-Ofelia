@@ -104,6 +104,10 @@ function clearOrder() {
     order = {};
     renderOrder();
 }
+function toggleCart() {
+    const panel = document.querySelector('.order-panel');
+    panel.classList.toggle('mobile-open');
+}
 
 function renderOrder() {
     const container = document.getElementById('orderItems');
