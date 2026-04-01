@@ -61,7 +61,7 @@
  }
 
  header::after {
-     content: '🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔';
+     /*content: '🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔🍔';*/
      position: absolute;
      right: -10px;
      top: 50%;
@@ -81,6 +81,32 @@
      align-items: center;
      gap: 10px;
      text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+ }
+
+ .logo {
+     display: flex;
+     align-items: center;
+     height: 100%;
+     /* Se ajusta a la altura del header (64px) */
+ }
+
+ /* La imagen del logo */
+ .logo-img {
+     height: 120px;
+     /* Al ser un logo circular con gorro, le damos más altura */
+     width: auto;
+     object-fit: contain;
+     /* Ajuste de posición para que el gorro sobresalga un poquito si querés */
+     margin-top: 10px;
+     filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
+     z-index: 10;
+ }
+
+ /* Ajuste del header para que no corte el logo si es muy alto */
+ header {
+     overflow: visible;
+     /* Permite que el gorro del chef sobresalga del header */
+     z-index: 100;
  }
 
  .logo span {
@@ -646,6 +672,20 @@
  }*/
  /* === RESPONSIVE & MOBILE OPTIMIZATION === */
  @media (max-width: 768px) {
+
+     @media (max-width: 768px) {
+         .logo-img {
+             height: 90px;
+             /* Un poco más chico en el celu */
+             margin-top: 5px;
+         }
+
+         header {
+             padding: 0 15px;
+             /* Menos espacio a los costados */
+         }
+     }
+
      .app {
          grid-template-columns: 1fr;
          /* Una sola columna en el cel */
