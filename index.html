@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Burger Queen — Sistema de Pedidos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">
+      <span>👑</span> Burger Queen
+    </div>
+    <div class="cashier-info">
+      <div class="cashier-dot"></div>
+      Cajero activo
+    </div>
+  </header>
+
+  <div class="app">
+    <!-- LEFT: MENU -->
+    <div class="menu-panel">
+      <div class="client-bar">
+        <label>CLIENTE</label>
+        <input type="text" id="clientName" placeholder="Nombre del cliente..." maxlength="40">
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="breakfast">☕ Desayuno</button>
+        <!--<button class="tab-btn" data-tab="allday">🍔 Resto del Día</button>-->
+      </div>
+
+      <div class="menu-scroll">
+        <!-- BREAKFAST -->
+        <div id="tab-breakfast" class="tab-content">
+          <div class="menu-section">
+            <div class="section-title">Desayuno</div>
+            <div class="menu-grid" id="grid-breakfast"></div>
+          </div>
+        </div>
+
+        <!-- ALL DAY -->
+        <!--<div id="tab-allday" class="tab-content" style="display:none;">
+          <div class="menu-section">
+            <div class="section-title">Hamburguesas</div>
+            <div class="menu-grid" id="grid-burgers"></div>
+          </div>
+          <div class="menu-section">
+            <div class="section-title">Acompañamientos</div>
+            <div class="menu-grid" id="grid-sides"></div>
+          </div>
+          <div class="menu-section">
+            <div class="section-title">Bebidas</div>
+            <div class="menu-grid" id="grid-drinks"></div>
+          </div>
+          <div class="menu-section">
+            <div class="section-title">Extras</div>
+            <div class="menu-grid" id="grid-extras"></div>
+          </div>
+        </div>-->
+      </div>
+    </div>
+
+    <!-- RIGHT: ORDER -->
+    <div class="order-panel">
+      <div class="order-header">
+        <div class="order-title">
+          Pedido
+          <span class="badge" id="itemCount">0</span>
+        </div>
+        <div class="order-customer" id="orderCustomer">Sin cliente</div>
+      </div>
+
+      <div class="order-items" id="orderItems">
+        <div class="order-empty" id="orderEmpty">
+          <div class="big-emoji">🛒</div>
+          <p>El pedido está vacío.<br>Seleccioná productos del menú.</p>
+        </div>
+      </div>
+
+      <div class="order-footer">
+        <div class="order-subtotals">
+          <div class="subtotal-row">
+            <span>Subtotal</span>
+            <span id="subtotalDisplay">$0</span>
+          </div>
+          <div class="subtotal-row total">
+            <span>TOTAL</span>
+            <span class="amount" id="totalDisplay">0</span>
+          </div>
+        </div>
+        <button class="send-btn" id="sendBtn" onclick="sendOrder()" disabled>
+          📤 Enviar a WhatssApp
+        </button>
+        <button class="clear-btn" onclick="clearOrder()">Limpiar pedido</button>
+      </div>
+    </div>
+  </div>
+  <!-- mensaje al enviar -->
+  <div class="toast" id="toast">✅ ¡Pedido enviado a cocina!</div>
+
+  <script src="Script.js"></script>
+</body>
+
+</html>
