@@ -1,4 +1,5 @@
  :root {
+     /*--bq-red: #D62300;
      --bq-red: #D62300;
      --bq-yellow: #F5A800;
      --bq-dark: #1A1008;
@@ -7,7 +8,25 @@
      --bq-gray: #F0EBE3;
      --bq-green: #1E7C34;
      --bq-border: rgba(61, 32, 0, 0.12);
-     --bq-shadow: 0 4px 24px rgba(26, 16, 8, 0.12);
+     --bq-shadow: 0 4px 24px rgba(26, 16, 8, 0.12);*/
+     --bq-red: #8B4513;
+     /* Marrón Terracota (Cuero/Madera) */
+     --bq-yellow: #D4A373;
+     /* Dorado Trigo (Pastas/Harina) */
+     --bq-dark: #2F3E1B;
+     /* Verde Oliva Oscuro (Albahaca/Fresco) */
+     --bq-brown: #4A3728;
+     /* Café Tostado */
+     --bq-cream: #FEFAE0;
+     /* Crema Manteca (Cálido) */
+     --bq-gray: #E9EDC6;
+     /* Verde Musgo Claro */
+     --bq-green: #606C38;
+     /* Verde Salvia (Hierbas) */
+
+     /* Bordes y Sombras suaves */
+     --bq-border: rgba(74, 55, 40, 0.15);
+     --bq-shadow: 0 6px 20px rgba(47, 62, 27, 0.1);
  }
 
  *,
