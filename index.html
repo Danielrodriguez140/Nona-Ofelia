@@ -13,112 +13,99 @@
 
 <body>
 
-  <header>
-    <div class="logo">
-      <span><img src="logo2.png" alt="Nona Ofelia Logo" class="logo-img"></span> Nona Ofelia
+  <!-- NAV -->
+  <nav>
+    <div class="logo">Nona Ofelia<span>Pastas Artesanales</span></div>
+    <div class="nav-links">
+      <a href="#menu">Menú</a>
+      <a href="#contacto">Contacto</a>
     </div>
-    <div class="cashier-info">
-      <div class="cashier-dot"></div>
-      Cajero activo
+    <button class="cart-btn" onclick="toggleCart()">
+      🛒 Mi pedido <span class="cart-count" id="cart-count">0</span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+
+    <div style="display:flex;flex-direction:column;align-items:center;gap:.5rem;margin-bottom:.5rem;">
+      <img src="logo2.png" id="hero-logo" alt="Nona Ofelia Logo"
+        style="width:500px;height:500px;object-fit:contain;filter:drop-shadow(0 4px 16px rgba(0,0,0,.45));display:block;" />
     </div>
-
-    <!--<div class="logo">
-      <span>👑</span> Nona Ofelia
-    </div>
-    <div class="cashier-info">
-      <div class="cashier-dot"></div>
-      Cajero activo
-    </div>-->
-  </header>
-
-  <button class="mobile-cart-btn" onclick="toggleCart()">
-    🛒 <span id="mobileBadge" class="badge">0</span>
-  </button>
-
-  <div class="app">
-    <!-- LEFT: MENU -->
-    <div class="menu-panel">
-      <div class="client-bar">
-        <label>CLIENTE</label>
-        <input type="text" id="clientName" placeholder="Nombre del cliente..." maxlength="40">
-      </div>
-
-      <div class="tabs">
-        <button class="tab-btn active" data-tab="breakfast">🫓 Sorrentinos</button>
-        <!--<button class="tab-btn" data-tab="allday">🍔 Resto del Día</button>-->
-      </div>
-
-      <div class="menu-scroll">
-        <!-- BREAKFAST -->
-        <div id="tab-breakfast" class="tab-content">
-          <div class="menu-section">
-            <div class="section-title">Rellenos</div>
-            <div class="menu-grid" id="grid-breakfast"></div>
-          </div>
-        </div>
-
-        <!-- ALL DAY -->
-        <!--<div id="tab-allday" class="tab-content" style="display:none;">
-          <div class="menu-section">
-            <div class="section-title">Hamburguesas</div>
-            <div class="menu-grid" id="grid-burgers"></div>
-          </div>
-          <div class="menu-section">
-            <div class="section-title">Acompañamientos</div>
-            <div class="menu-grid" id="grid-sides"></div>
-          </div>
-          <div class="menu-section">
-            <div class="section-title">Bebidas</div>
-            <div class="menu-grid" id="grid-drinks"></div>
-          </div>
-          <div class="menu-section">
-            <div class="section-title">Extras</div>
-            <div class="menu-grid" id="grid-extras"></div>
-          </div>
-        </div>-->
-      </div>
-    </div>
-
-    <!-- RIGHT: ORDER -->
-    <div class="order-panel">
-      <div class="order-header">
-        <div class="order-title">
-          Pedido
-          <span class="badge" id="itemCount">0</span>
-          <button class="close-order-btn" onclick="toggleCart()">CERRAR ✕</button>
-        </div>
-        <div class="order-customer" id="orderCustomer">Sin cliente</div>
-      </div>
-
-      <div class="order-items" id="orderItems">
-        <div class="order-empty" id="orderEmpty">
-          <div class="big-emoji">🛒</div>
-          <p>El pedido está vacío.<br>Seleccioná productos del menú.</p>
-        </div>
-      </div>
-
-      <div class="order-footer">
-        <div class="order-subtotals">
-          <div class="subtotal-row">
-            <span>Subtotal</span>
-            <span id="subtotalDisplay">$0</span>
-          </div>
-          <div class="subtotal-row total">
-            <span>TOTAL</span>
-            <span class="amount" id="totalDisplay">0</span>
-          </div>
-        </div>
-        <button class="send-btn" id="sendBtn" onclick="sendOrder()" disabled>
-          📤 Enviar a WhatssApp
-        </button>
-        <button class="clear-btn" onclick="clearOrder()">Limpiar pedido</button>
-      </div>
+    <p class="hero-sub">El sabor de siempre, con el relleno que se nota</p>
+    <p class="hero-loc"></p>
+    <div class="hero-badges">
+      <span class="badge">✦ Relleno abundante</span>
+      <span class="badge">✦ Precios accesibles</span>
+      <span class="badge">✦ Elaboración artesanal</span>
     </div>
   </div>
-  <!-- mensaje al enviar -->
-  <div class="toast" id="toast">✅ ¡Pedido enviado a cocina!</div>
 
-  <script src="Script.js"></script>
+  <!-- SOBRE NONA -->
+  <div class="sobre">
+    <section>
+      <div class="sobre-inner">
+        <div class="section-title">
+          <div class="ornament">— ✦ —</div>
+          <h2>La historia detrás de cada pasta</h2>
+        </div>
+        <p>Somos Nona Ofelia, y hacemos pastas como se hacen de verdad: con las manos, con tiempo y con mucho
+          relleno. Nuestros sorrentinos son generosos porque así los aprendí a hacer, y mis precios son justos
+          porque creo que comer rico no tiene que ser un lujo.</p>
+        <p>Trabajamos desde casa, preparando cada pedido con dedicación. Porque la diferencia siempre se
+          nota en el plato.</p>
+        <div class="firma">— Ofelia</div>
+      </div>
+    </section>
+  </div>
+
+  <!-- MENU -->
+  <div class="menu-bg" id="menu">
+    <section>
+      <div class="section-title">
+        <div class="ornament">— ✦ —</div>
+        <h2>Nuestras pastas</h2>
+      </div>
+      <div class="products-grid" id="products-grid"></div>
+    </section>
+  </div>
+
+  <!-- CONTACTO -->
+  <div class="contacto" id="contacto">
+    <h2>¿Querés hacer tu pedido?</h2>
+    <p>Cargá tu pedido en el carrito y te contactamos por WhatsApp para coordinar entrega o retiro en Tres Isletas.
+    </p>
+    <div class="contact-chips">
+      <span class="chip"> Tres Isletas, Chaco</span>
+      <span class="chip"> Pedidos por WhatsApp</span>
+      <span class="chip"> Encargos con anticipación</span>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 <strong>Nona Ofelia</strong> — Pastas Artesanales · Tres Isletas, Chaco
+  </footer>
+
+  <!-- OVERLAY + CARRITO -->
+  <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+  <div class="cart-panel" id="cart-panel">
+    <div class="cart-header">
+      <h3>Tu pedido</h3>
+      <button class="close-cart" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <p class="cart-empty">Tu pedido está vacío.<br>¡Elegí tus pastas!</p>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total estimado</span>
+        <span id="cart-total">$0</span>
+      </div>
+      <button class="wsp-btn" id="wsp-btn" onclick="sendWhatsApp()" disabled>
+        Enviar pedido por WhatsApp
+      </button>
+    </div>
+  </div>
 </body>
 
 </html>

@@ -1,224 +1,100 @@
-// ===== MENU DATA =====
-/*const MENU = {
-    breakfast: [
-        { id: 'b1', emoji: '☕', name: 'Café Americano', price: 5 },
-        { id: 'b2', emoji: '☕', name: 'Café con Leche', price: 7 },
-        { id: 'b3', emoji: '🥪', name: 'Sandwich de Jamón y Queso', price: 10 },
-        { id: 'b4', emoji: '🍊', name: 'Jugo Natural', price: 7 },
-    ],
-    burgers: [
-        { id: 'h1', emoji: '🍔', name: 'Hamburguesa Simple (Res)', price: 10, note: 'Res' },
-        { id: 'h2', emoji: '🍔', name: 'Hamburguesa Doble (Res)', price: 15, note: 'Res' },
-        { id: 'h3', emoji: '🍗', name: 'Hamburguesa Simple (Pollo)', price: 10, note: 'Pollo' },
-        { id: 'h4', emoji: '🍗', name: 'Hamburguesa Doble (Pollo)', price: 15, note: 'Pollo' },
-        { id: 'h5', emoji: '🥦', name: 'Hamburguesa Simple (Veggie)', price: 10, note: 'Vegetariana' },
-        { id: 'h6', emoji: '🥦', name: 'Hamburguesa Doble (Veggie)', price: 15, note: 'Vegetariana' },
-    ],
-    sides: [
-        { id: 's1', emoji: '🍟', name: 'Papas Fritas', price: 5 },
-        { id: 's2', emoji: '🧅', name: 'Onion Rings', price: 5 },
-    ],
-    drinks: [
-        { id: 'd1', emoji: '💧', name: 'Agua 500ml', price: 5 },
-        { id: 'd2', emoji: '💧', name: 'Agua 750ml', price: 8 },
-        { id: 'd3', emoji: '🥤', name: 'Refresco 500ml', price: 7 },
-        { id: 'd4', emoji: '🥤', name: 'Refresco 750ml', price: 10 },
-    ],
-    extras: [
-        { id: 'e1', emoji: '🧀', name: 'Extra Queso', price: 1 },
-        { id: 'e2', emoji: '🍳', name: 'Extra Huevo', price: 1 },
-    ]
-};*/
+const WSP_NUMBER = "543512636819"; // ← REEMPLAZÁ con tu número real (con código de país, sin +)
 
-const PRODUCTS = [
-    { id: 1, name: "Sorrentinos de jamón y mozzarella", desc: "Relleno cremoso, masa fina artesanal", price: 4000, emoji: "🫓", cat: "Sorrentinos", unit: "caja" },
-    { id: 2, name: "Sorrentinos de ricota y espinaca", desc: "Con queso fresco y espinaca salteada", price: 400, emoji: "🫓", cat: "Sorrentinos", unit: "caja" },
-    { id: 3, name: "Sorrentinos de carne", desc: "Relleno de carne braseada y verduras", price: 400, emoji: "🫓", cat: "Sorrentinos", unit: "caja" },
-    { id: 4, name: "Sorrentinos 4 quesos", desc: "Mozzarella, provolone, parmesano y ricota", price: 400, emoji: "🫓", cat: "Sorrentinos", unit: "caja" },
-    { id: 5, name: "Sorrentinos de pollo", desc: "Pollo desmenuzado con ciboulette", price: 400, emoji: "🫓", cat: "Sorrentinos", unit: "caja" },
-    { id: 6, name: "Sorrentinos de calabaza", desc: "Calabaza asada con nuez moscada", price: 400, emoji: "🫓", cat: "Sorrentinos", unit: "caja" },
-    /*{ id: 7, name: "Salsa fileto", desc: "Tomate natural con albahaca fresca", price: 900, emoji: "🍅", cat: "Salsas", unit: "porción" },
-    { id: 8, name: "Salsa bolognesa", desc: "Carne picada con vino y especias", price: 1200, emoji: "🥫", cat: "Salsas", unit: "porción" },
-    { id: 9, name: "Salsa crema", desc: "Crema de leche con ajo y perejil", price: 850, emoji: "🧄", cat: "Salsas", unit: "porción" },*/
-
+const products = [
+    { id: 1, name: "Sorrentinos de Jamón y Queso", tipo: "Sorrentinos", desc: "Rellenos con jamón cocido seleccionado y queso cremoso. Clásico irresistible.", price: 1800, emoji: "🧀" },
+    { id: 2, name: "Sorrentinos de Pollo", tipo: "Sorrentinos", desc: "Con tierno pollo sazonado, cebolla caramelizada y toque de crema. Muy rellenos.", price: 1800, emoji: "🍗" },
+    { id: 3, name: "Sorrentinos de Ricota y Espinaca", tipo: "Sorrentinos", desc: "Ricota fresca con espinaca salteada. Suaves, livianos y llenos de sabor.", price: 1800, emoji: "🌿" },
+    { id: 4, name: "Sorrentinos de Carne", tipo: "Sorrentinos", desc: "Carne picada especiada con verduras, receta de la Nona. Los más pedidos.", price: 1900, emoji: "🥩" },
+    { id: 5, name: "Combinado (2 sabores)", tipo: "Variedad", desc: "Elegí 2 sabores a tu gusto. Ideal para los que no se pueden decidir.", price: 3400, emoji: "🍝" },
+    { id: 6, name: "Porción familiar (4 sabores)", tipo: "Variedad", desc: "Los 4 sabores en una sola caja. Relleno abundante garantizado en cada uno.", price: 6500, emoji: "🏡" },
 ];
 
-// ===== STATE =====
-let order = {}; // { id: { item, qty } }
+let cart = {};
 
-// ===== RENDER MENUS =====
-function renderGrid(gridId, items) {
-    const grid = document.getElementById(gridId);
-    grid.innerHTML = '';
-    items.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'menu-item';
-        div.innerHTML = `
-        <div class="item-emoji">${item.emoji}</div>
-        <div class="item-name">${item.name}</div>
-        <div class="item-price">${item.desc}</div>
-        <div class="item-price">${item.price}</div>
-        
-        ${item.note ? `<div class="item-note">${item.note}</div>` : ''}
-      `;
-        div.addEventListener('click', () => addItem(item, div));
-        grid.appendChild(div);
-    });
+function renderProducts() {
+    const g = document.getElementById("products-grid");
+    g.innerHTML = products.map(p => `
+    <div class="product-card">
+      <div class="card-ribbon">
+        <span class="emoji">${p.emoji}</span>
+        <h3>${p.name}</h3>
+        <span class="tipo">${p.tipo}</span>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">${p.desc}</p>
+        <div class="card-footer">
+          <div class="price">$${p.price.toLocaleString('es-AR')}<span class="unit">por docena</span></div>
+          <button class="add-btn" onclick="addToCart(${p.id})">+ Agregar</button>
+        </div>
+      </div>
+    </div>`).join("");
 }
 
-renderGrid('grid-breakfast', PRODUCTS);
-//renderGrid('grid-burgers', MENU.burgers);
-//renderGrid('grid-sides', MENU.sides);
-//renderGrid('grid-drinks', MENU.drinks);
-//renderGrid('grid-extras', MENU.extras);
-
-// ===== TABS =====
-document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
-        btn.classList.add('active');
-        document.getElementById('tab-' + btn.dataset.tab).style.display = 'block';
-    });
-});
-
-// ===== ORDER LOGIC =====
-function addItem(item, el) {
-    if (order[item.id]) {
-        order[item.id].qty++;
-    } else {
-        order[item.id] = { item, qty: 1 };
-    }
-    el.classList.add('adding');
-    setTimeout(() => el.classList.remove('adding'), 300);
-    renderOrder();
+function addToCart(id) {
+    cart[id] = (cart[id] || 0) + 1;
+    updateCart();
+    const panel = document.getElementById("cart-panel");
+    if (!panel.classList.contains("open")) toggleCart();
 }
 
 function changeQty(id, delta) {
-    if (!order[id]) return;
-    order[id].qty += delta;
-    if (order[id].qty <= 0) delete order[id];
-    renderOrder();
+    cart[id] = (cart[id] || 0) + delta;
+    if (cart[id] <= 0) delete cart[id];
+    updateCart();
 }
 
-function clearOrder() {
-    order = {};
-    renderOrder();
-}
-function toggleCart() {
-    const panel = document.querySelector('.order-panel');
-    panel.classList.toggle('mobile-open');
-}
+function updateCart() {
+    const keys = Object.keys(cart);
+    const count = keys.reduce((s, k) => s + cart[k], 0);
+    document.getElementById("cart-count").textContent = count;
 
-function renderOrder() {
-    const container = document.getElementById('orderItems');
-    const empty = document.getElementById('orderEmpty');
-    const entries = Object.values(order);
-
-    // Customer name
-    const name = document.getElementById('clientName').value.trim();
-    document.getElementById('orderCustomer').innerHTML = name
-        ? `Cliente: <span>${name}</span>`
-        : 'Sin cliente';
-
-    // Items
-    const existing = container.querySelectorAll('.order-row');
-    existing.forEach(e => e.remove());
-
-    if (entries.length === 0) {
-        empty.style.display = 'flex';
-    } else {
-        empty.style.display = 'none';
-        entries.forEach(({ item, qty }) => {
-            const row = document.createElement('div');
-            row.className = 'order-row';
-            row.innerHTML = `
-          <div class="order-row-emoji">${item.emoji}</div>
-          <div class="order-row-info">
-            <div class="order-row-name">${item.name}</div>
-            <div class="order-row-price">$${(item.price * qty).toFixed(0)}</div>
-          </div>
-          <div class="qty-ctrl">
-            <button class="qty-btn minus" onclick="changeQty('${item.id}', -1)">−</button>
-            <span class="qty-num">${qty}</span>
-            <button class="qty-btn plus" onclick="changeQty('${item.id}', 1)">+</button>
-          </div>
-        `;
-            container.appendChild(row);
-        });
+    const itemsEl = document.getElementById("cart-items");
+    if (keys.length === 0) {
+        itemsEl.innerHTML = '<p class="cart-empty">Tu pedido está vacío.<br>¡Elegí tus pastas!</p>';
+        document.getElementById("cart-total").textContent = "$0";
+        document.getElementById("wsp-btn").disabled = true;
+        return;
     }
 
-    // Total
-    const total = entries.reduce((s, { item, qty }) => s + item.price * qty, 0);
-    const count = entries.reduce((s, { qty }) => s + qty, 0);
-
-    // AGREGAR ESTA LÍNEA para mobil
-    if (document.getElementById('mobileBadge')) {
-        document.getElementById('mobileBadge').textContent = count;
-    }
-
-    document.getElementById('sendBtn').disabled = entries.length === 0;
-
-    document.getElementById('subtotalDisplay').textContent = '$' + total;
-    document.getElementById('totalDisplay').textContent = total;
-    document.getElementById('itemCount').textContent = count;
-    document.getElementById('sendBtn').disabled = entries.length === 0;
-
-
-
-
-}
-
-// Client name live update
-document.getElementById('clientName').addEventListener('input', renderOrder);
-
-// Eviar mensaje WSP
-function sendWA() {
-    const items = Object.entries(order);
-    /*if (items.length === 0) { showToast("El carrito está vacío"); return; }*/
-    const nombre = document.getElementById("clientName").value.trim() || "Cliente";
-    //const nota = document.getElementById("cnota").value.trim();
     let total = 0;
-
-
-
-    let lines = items.map((e) => {
-        const p = PRODUCTS.find(x => x.id == e[0]);
-        const sub = p.price * e[1].qty;
+    itemsEl.innerHTML = keys.map(k => {
+        const p = products.find(x => x.id == k);
+        const sub = p.price * cart[k];
         total += sub;
-        return `• ${p.name} x${e[1].qty} ${p.unit} = $${sub.toLocaleString('es-AR')}`;
+        return `<div class="cart-item">
+      <div class="cart-item-name">${p.emoji} ${p.name}<small>$${p.price.toLocaleString('es-AR')} c/u</small></div>
+      <div class="qty-ctrl">
+        <button class="qty-btn" onclick="changeQty(${k},-1)">−</button>
+        <span class="qty-num">${cart[k]}</span>
+        <button class="qty-btn" onclick="changeQty(${k},1)">+</button>
+      </div>
+      <div class="item-price">$${sub.toLocaleString('es-AR')}</div>
+    </div>`;
+    }).join("");
+
+    document.getElementById("cart-total").textContent = "$" + total.toLocaleString('es-AR');
+    document.getElementById("wsp-btn").disabled = false;
+}
+
+function toggleCart() {
+    document.getElementById("cart-panel").classList.toggle("open");
+    document.getElementById("overlay").classList.toggle("open");
+}
+
+function sendWhatsApp() {
+    const keys = Object.keys(cart);
+    if (!keys.length) return;
+    let msg = "🍝 *Hola Nona Ofelia! Quiero hacer el siguiente pedido:*\n\n";
+    let total = 0;
+    keys.forEach(k => {
+        const p = products.find(x => x.id == k);
+        const sub = p.price * cart[k];
+        total += sub;
+        msg += `• ${p.name} x${cart[k]} = $${sub.toLocaleString('es-AR')}\n`;
     });
-
-
-    let msg = `Hola Nona Ofelia! Soy *${nombre}* y quiero hacer el siguiente pedido:%0A%0A${lines.join('%0A')}%0A%0A*Total: $${total.toLocaleString('es-AR')}*`;
-    /*if (nota) msg += `%0A%0A_Nota: ${nota}_`;*/
-    msg += `%0A%0AMuchas gracias!`;
-    window.open(`https://wa.me/543512636819?text=${msg}`, "_blank");
+    msg += `\n*Total estimado: $${total.toLocaleString('es-AR')}*\n\n¿Podés confirmar disponibilidad y coordinar la entrega? ¡Muchas gracias!`;
+    const url = `https://wa.me/${WSP_NUMBER}?text=${encodeURIComponent(msg)}`;
+    window.open(url, "_blank");
 }
 
-// ===== SEND ORDER =====
-function sendOrder() {
-    const entries = Object.values(order);
-    if (entries.length === 0) return;
-
-    const toast = document.getElementById('toast');
-    const name = document.getElementById('clientName').value.trim();
-    toast.textContent = name
-        ? `✅ Pedido de ${name} enviado a Nona Ofelia!`
-        : '✅ ¡Pedido enviado a Nona Ofelia!';
-
-    toast.classList.add('show');
-
-    setTimeout(() => toast.classList.remove('show'), 3500);
-
-    sendWA();
-
-    // Reset
-    clearOrder();
-    document.getElementById('clientName').value = '';
-    renderOrder();
-}
-
-let prueba = Object.values(order);
-
-renderOrder();
+renderProducts();
